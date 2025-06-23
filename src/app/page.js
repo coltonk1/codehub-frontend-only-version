@@ -1,6 +1,9 @@
 import { getDatabase, ref, get } from "firebase/database";
 import { db } from "@/lib/firebase";
 import Link from "next/link";
+import Hero from "./Hero.client";
+import Curve from "@/assets/curve";
+import Project from "./Project.client";
 
 export default async function CodeHubLanding() {
     const [projSnap, tmpSnap, faqSnap, formSnap] = await Promise.all([
@@ -38,8 +41,20 @@ export default async function CodeHubLanding() {
         <div className="min-h-screen overflow-x-hidden flex flex-col gap-10">
             <Hero />
             <About />
-            <RecentProjects projects={projects} />
-            <Templates templates={templates} />
+            <div className="p-4">
+                <div
+                    style={{
+                        backgroundImage:
+                            "url(/dot.png), linear-gradient(to bottom right, #334BB7 25%, #3556B9 75%)",
+                        backgroundRepeat: "repeat",
+                    }}
+                >
+                    <Curve className="w-full mb-25 rotate-180" />
+                    <RecentProjects projects={projects} />
+                    <Templates templates={templates} />
+                    <Curve className="w-full mt-25" />
+                </div>
+            </div>
             <FAQs faqs={faqs} />
             <CTA />
 
@@ -53,38 +68,9 @@ export default async function CodeHubLanding() {
     );
 }
 
-function Hero() {
-    return (
-        <section className="text-white text-center p-4">
-            <div
-                className="py-50 rounded-2xl shadow-lg"
-                style={{
-                    backgroundImage: "url(/hero-image.jpg)",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                }}
-            >
-                <h1 className="text-4xl md:text-6xl font-extrabold mb-4 text-yellow-300">
-                    CodeHub
-                </h1>
-                <p className="text-lg md:text-2xl max-w-2xl mx-auto">
-                    Build real projects. Learn modern tech. Demo your work every
-                    semester.
-                </p>
-                <Link
-                    href="/projects"
-                    className="inline-block mt-10 bg-white text-blue-600 font-semibold px-6 py-3 rounded-full shadow-lg hover:scale-105 transition"
-                >
-                    Explore Projects
-                </Link>
-            </div>
-        </section>
-    );
-}
-
 function About() {
     return (
-        <section className="bg-gray-100 py-16 px-4 text-gray-800">
+        <section className="px-4 text-gray-800">
             <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-10 p-10 ">
                 {/* Text Content */}
                 <div className="flex-1">
@@ -134,46 +120,12 @@ function RecentProjects({ projects }) {
     return (
         <section id="projects" className="py-16 px-6">
             <div className="max-w-6xl mx-auto">
-                <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">
+                <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
                     Latest Projects
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                    {projects.map((p) => (
-                        <div
-                            key={p.id}
-                            className="rounded-2xl shadow-md hover:shadow-xl transition overflow-hidden"
-                        >
-                            {p.imageUrl ? (
-                                <img
-                                    src={p.imageUrl}
-                                    alt={`${p.title} preview`}
-                                    className="h-48 w-full object-cover"
-                                />
-                            ) : (
-                                <div className="h-48 w-full bg-gray-200 flex items-center justify-center text-gray-400 text-sm">
-                                    No Image
-                                </div>
-                            )}
-                            <div className="p-5">
-                                <h3 className="text-lg font-semibold text-gray-800 truncate mb-1">
-                                    {p.title}
-                                </h3>
-                                <p className="text-sm text-gray-600 mb-2 line-clamp-2">
-                                    {p.description}
-                                </p>
-                                <p className="text-xs text-gray-500 mb-3">
-                                    {p.semester} {p.year}
-                                </p>
-                                <Link
-                                    href={`/projects/${p.title
-                                        .toLowerCase()
-                                        .replaceAll(" ", "-")}`}
-                                    className="inline-block text-indigo-600 text-sm font-medium hover:underline"
-                                >
-                                    View Project →
-                                </Link>
-                            </div>
-                        </div>
+                    {projects.map((p, i) => (
+                        <Project p={p} key={i} delay={i * 0.15} />
                     ))}
                 </div>
                 <div className="text-center mt-12">
@@ -193,7 +145,7 @@ function Templates({ templates }) {
     return (
         <section id="templates" className="py-16 px-6">
             <div className="max-w-6xl mx-auto">
-                <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">
+                <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
                     Starter Code Templates
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -237,38 +189,33 @@ function Templates({ templates }) {
 
 function FAQs({ faqs }) {
     return (
-        <section id="faqs" className="w-full p-4">
-            <div className="py-32 w-full flex justify-center bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-400 p-16 text-white rounded-2xl shadow-lg">
-                <div className="max-w-4xl w-full bg-white rounded-2xl p-10 sm:p-12 md:p-16 shadow-lg">
-                    <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-gray-800">
-                        FAQs
-                    </h2>
-                    <div className="space-y-6">
-                        {faqs.map((faq) => (
-                            <details
-                                key={faq.id}
-                                className="rounded-xl border border-gray-200 p-5 group"
-                            >
-                                <summary className="font-semibold text-gray-800 cursor-pointer marker:content-none flex justify-between items-center">
-                                    {faq.question}
-                                    <span className="text-blue-500 group-open:rotate-180 transition-transform">
-                                        ▼
-                                    </span>
-                                </summary>
-                                <p className="mt-3 text-sm text-gray-600 leading-relaxed">
-                                    {faq.answer}
-                                </p>
-                            </details>
-                        ))}
-                    </div>
-                    <div className="text-center mt-10">
-                        <Link
-                            href="/faqs"
-                            className="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-full shadow hover:bg-blue-600 transition"
+        <section id="faqs" className="w-full">
+            <div className="max-w-4xl w-full mx-auto p-10 sm:p-12 md:p-16 z-10">
+                <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-gray-800">
+                    FAQs
+                </h2>
+                <div className="space-y-6">
+                    {faqs.map((faq) => (
+                        <div
+                            key={faq.id}
+                            className="rounded-xl border border-gray-200 p-5 group"
                         >
-                            More FAQs
-                        </Link>
-                    </div>
+                            <strong className="font-semibold text-gray-800 marker:content-none flex justify-between items-center">
+                                {faq.question}
+                            </strong>
+                            <p className="mt-3 text-sm text-gray-600 leading-relaxed">
+                                {faq.answer}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+                <div className="text-center mt-10">
+                    <Link
+                        href="/faqs"
+                        className="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-full shadow hover:bg-blue-600 transition"
+                    >
+                        More FAQs
+                    </Link>
                 </div>
             </div>
         </section>
