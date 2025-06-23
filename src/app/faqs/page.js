@@ -42,10 +42,10 @@ export default async function FaqsPage() {
                 {/* CTA */}
                 <div className="text-center mt-16">
                     <p className="text-lg text-gray-700 mb-4">
-                        Didn’t find what you were looking for?
+                        Didn't find what you were looking for?
                     </p>
                     <a
-                        href="https://discord.gg/YOUR_DISCORD_LINK" // replace with actual invite
+                        href="https://discord.gg/bkmC9NYMaN"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-block bg-blue-500 text-white font-semibold px-6 py-3 rounded-full shadow hover:bg-blue-700 transition"

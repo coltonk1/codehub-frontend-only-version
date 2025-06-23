@@ -36,15 +36,17 @@ export default function ProjectPage() {
 
     return (
         <section className="py-20 px-4">
-            <div className="max-w-4xl mx-auto space-y-12">
-                {/* Main Project Card */}
-                <div className="bg-white border border-gray-200 rounded-2xl shadow-xl p-6">
-                    <h1 className="text-3xl font-bold text-gray-800 mb-4">
+            <div className="max-w-5xl mx-auto space-y-16">
+                {/* Main Project Section - No Card */}
+                <div>
+                    <h1 className="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">
                         {selected.title}
                     </h1>
-                    <p className="text-gray-600 mb-6">{selected.description}</p>
+                    <p className="text-lg text-gray-700 mb-8 max-w-2xl">
+                        {selected.description}
+                    </p>
 
-                    <div className="w-full aspect-video bg-gray-200 flex items-center justify-center rounded overflow-hidden mb-6">
+                    <div className="w-full aspect-video bg-gray-100 flex items-center justify-center rounded-xl overflow-hidden mb-8 border border-gray-300">
                         {selected.imageUrl ? (
                             <img
                                 src={selected.imageUrl}
@@ -53,7 +55,7 @@ export default function ProjectPage() {
                             />
                         ) : (
                             <span className="text-gray-500 text-sm">
-                                No Image
+                                No Image Available
                             </span>
                         )}
                     </div>
@@ -81,7 +83,7 @@ export default function ProjectPage() {
                                 <a
                                     href={selected.github}
                                     target="_blank"
-                                    className="text-indigo-600 underline hover:text-indigo-800"
+                                    className="text-blue-600 underline hover:text-blue-800"
                                 >
                                     {selected.github}
                                 </a>
@@ -93,7 +95,7 @@ export default function ProjectPage() {
                                 <a
                                     href={selected.live}
                                     target="_blank"
-                                    className="text-indigo-600 underline hover:text-indigo-800"
+                                    className="text-blue-600 underline hover:text-blue-800"
                                 >
                                     {selected.live}
                                 </a>
@@ -104,7 +106,7 @@ export default function ProjectPage() {
 
                 {/* Other Projects Preview */}
                 <div>
-                    <h2 className="text-lg font-semibold text-gray-800 mb-4">
+                    <h2 className="text-xl font-semibold text-gray-800 mb-4">
                         Other Projects
                     </h2>
                     <div className="flex gap-4 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-hide">
@@ -112,13 +114,13 @@ export default function ProjectPage() {
                             <button
                                 key={proj.id}
                                 onClick={() => setSelected(proj)}
-                                className={`flex-shrink-0 basis-[calc(33.333%-1rem)] bg-white border border-gray-200 rounded-2xl shadow-md p-3 hover:shadow-lg transition text-left ${
+                                className={`flex-shrink-0 min-w-[250px] max-w-[300px] bg-white border ${
                                     proj.id === selected.id
-                                        ? "ring-2 ring-blue-500"
-                                        : ""
-                                }`}
+                                        ? "border-blue-500"
+                                        : "border-gray-200"
+                                } rounded-2xl shadow-sm overflow-hidden hover:shadow-md transition-all text-left`}
                             >
-                                <div className="aspect-video bg-gray-200 rounded-xl overflow-hidden mb-2">
+                                <div className="aspect-video bg-gray-100 border-b border-gray-200">
                                     {proj.imageUrl ? (
                                         <img
                                             src={proj.imageUrl}
@@ -131,11 +133,13 @@ export default function ProjectPage() {
                                         </div>
                                     )}
                                 </div>
-                                <div className="text-sm font-semibold text-gray-800 truncate">
-                                    {proj.title}
-                                </div>
-                                <div className="text-xs text-gray-500">
-                                    {proj.semester} {proj.year}
+                                <div className="p-4 space-y-1">
+                                    <div className="text-sm font-semibold text-gray-800 truncate">
+                                        {proj.title}
+                                    </div>
+                                    <div className="text-xs text-gray-500">
+                                        {proj.semester} {proj.year}
+                                    </div>
                                 </div>
                             </button>
                         ))}

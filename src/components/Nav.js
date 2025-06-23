@@ -9,7 +9,7 @@ export default function Main() {
                     href="/"
                     className="text-xl font-bold text-white hover:text-black transition"
                 >
-                    CodeHub @ UGA
+                    CodeHub
                 </Link>
                 <nav className="space-x-2 text-sm font-medium text-white">
                     <Link href="/projects" className="hover:text-black p-4">

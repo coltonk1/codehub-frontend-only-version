@@ -85,7 +85,7 @@ export default async function TemplatesPage({ searchParams }) {
                             <h3 className="font-bold text-lg text-gray-800 mb-2">
                                 {t.title}
                             </h3>
-                            <p className="text-gray-600 text-sm mb-2 line-clamp-3">
+                            <p className="text-gray-600 text-sm mb-2">
                                 {t.description}
                             </p>
                             <p className="text-sm text-gray-500 mb-3">

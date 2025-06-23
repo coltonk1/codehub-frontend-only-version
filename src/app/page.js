@@ -41,6 +41,7 @@ export default async function CodeHubLanding() {
             <RecentProjects projects={projects} />
             <Templates templates={templates} />
             <FAQs faqs={faqs} />
+            <CTA />
 
             <footer className="bg-gray-900 text-gray-400 text-center py-6">
                 <p className="text-sm">
@@ -64,7 +65,7 @@ function Hero() {
                 }}
             >
                 <h1 className="text-4xl md:text-6xl font-extrabold mb-4 text-yellow-300">
-                    CodeHub @ UGA
+                    CodeHub
                 </h1>
                 <p className="text-lg md:text-2xl max-w-2xl mx-auto">
                     Build real projects. Learn modern tech. Demo your work every
@@ -72,7 +73,7 @@ function Hero() {
                 </p>
                 <Link
                     href="/projects"
-                    className="inline-block mt-10 bg-white text-blue-500 font-semibold px-6 py-3 rounded-full shadow-lg hover:scale-105 transition"
+                    className="inline-block mt-10 bg-white text-blue-600 font-semibold px-6 py-3 rounded-full shadow-lg hover:scale-105 transition"
                 >
                     Explore Projects
                 </Link>
@@ -178,7 +179,7 @@ function RecentProjects({ projects }) {
                 <div className="text-center mt-12">
                     <Link
                         href="/projects"
-                        className="inline-block bg-blue-500 text-white font-semibold px-6 py-3 rounded-full shadow hover:bg-indigo-700 transition"
+                        className="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-full shadow hover:bg-indigo-700 transition"
                     >
                         Browse All Projects
                     </Link>
@@ -224,7 +225,7 @@ function Templates({ templates }) {
                 <div className="text-center mt-12">
                     <Link
                         href="/templates"
-                        className="inline-block bg-blue-500 text-white font-semibold px-6 py-3 rounded-full shadow hover:bg-indigo-700 transition"
+                        className="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-full shadow hover:bg-indigo-700 transition"
                     >
                         See All Templates
                     </Link>
@@ -263,11 +264,43 @@ function FAQs({ faqs }) {
                     <div className="text-center mt-10">
                         <Link
                             href="/faqs"
-                            className="inline-block bg-blue-500 text-white font-semibold px-6 py-3 rounded-full shadow hover:bg-blue-600 transition"
+                            className="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-full shadow hover:bg-blue-600 transition"
                         >
                             More FAQs
                         </Link>
                     </div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function CTA() {
+    return (
+        <section className="bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800 py-20 px-6">
+            <div className="max-w-4xl mx-auto text-center">
+                <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-gray-800">
+                    Ready to Build Something Awesome?
+                </h2>
+                <p className="text-lg md:text-xl mb-8">
+                    Whether you're a beginner or a seasoned developer, CodeHub
+                    is your space to grow, build, and shine. Join our community
+                    or check out past projects to get inspired.
+                </p>
+                <div className="flex flex-col sm:flex-row justify-center gap-4">
+                    <Link
+                        href="https://discord.gg/bkmC9NYMaN"
+                        target="_blank"
+                        className="bg-white text-blue-600 font-semibold px-6 py-3 rounded-full  hover:scale-105 transition"
+                    >
+                        Join the Discord
+                    </Link>
+                    <Link
+                        href="/projects"
+                        className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-full hover:scale-105 transition"
+                    >
+                        Browse Projects
+                    </Link>
                 </div>
             </div>
         </section>
