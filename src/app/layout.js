@@ -17,14 +17,14 @@ export const metadata = {
     title: "CodeHub",
     description:
         "A student-run organization at the University of Georgia where students build real projects and learn modern tech through hands-on experience.",
+    icons: {
+        icon: "/logo.jpg",
+    },
 };
 
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-            <head>
-                <link rel="icon" href="/logo.jpg" />
-            </head>
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
