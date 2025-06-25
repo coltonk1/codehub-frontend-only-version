@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import Curve from "@/assets/curve";
 import { motion } from "framer-motion";
+import CTALink from "@/components/CTALink";
 
 export default function Hero() {
     return (
@@ -10,9 +10,12 @@ export default function Hero() {
             <div
                 className="pt-50 rounded-md"
                 style={{
-                    backgroundImage: "url(/hero-image.jpg)",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
+                    backgroundImage:
+                        "linear-gradient(to bottom right, #444A6C 12%, #3A68FF 50%), url(/dot.png), url(/hero-image.webp)",
+                    backgroundSize: "cover, 10px, cover",
+                    backgroundPosition: "center, center, center",
+                    backgroundRepeat: "no-repeat, repeat, no-repeat",
+                    backgroundBlendMode: "multiply, overlay, normal",
                 }}
             >
                 <motion.h1
@@ -23,7 +26,6 @@ export default function Hero() {
                 >
                     CodeHub
                 </motion.h1>
-
                 <motion.p
                     className="text-lg md:text-2xl max-w-2xl mx-auto"
                     initial={{ opacity: 0, y: 40 }}
@@ -33,20 +35,16 @@ export default function Hero() {
                     Build real projects. Learn modern tech. Demo your work every
                     semester.
                 </motion.p>
-
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.6 }}
+                    className="mt-6"
                 >
-                    <Link
-                        href="/projects"
-                        className="inline-block mt-10 bg-white text-blue-600 font-semibold px-12 py-3 rounded-full hover:scale-105 transition"
-                    >
+                    <CTALink href="/projects" variant="white">
                         Explore Projects
-                    </Link>
+                    </CTALink>
                 </motion.div>
-
                 <Curve className="w-full mt-25" />
             </div>
         </section>

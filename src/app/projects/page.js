@@ -1,56 +1,48 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import Link from "next/link";
 import { ref, get } from "firebase/database";
 import { db } from "@/lib/firebase";
 
 const semesterOrder = { Spring: 0, Fall: 1 };
 
-export default function ProjectPage() {
-    const [projects, setProjects] = useState([]);
-    const [selected, setSelected] = useState(null);
+function slugify(title) {
+    return title.toLowerCase().replace(/\s+/g, "-");
+}
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const snapshot = await get(ref(db, "projects"));
-            const data = snapshot.val() || {};
-            const projectList = Object.entries(data).map(([id, val]) => ({
-                id,
-                ...val,
-            }));
+export default async function ProjectPage() {
+    const snap = await get(ref(db, "projects"));
+    const data = snap.val() ?? {};
 
-            const sorted = projectList.sort((a, b) => {
-                const yearDiff = b.year - a.year;
-                if (yearDiff !== 0) return yearDiff;
-                return semesterOrder[b.semester] - semesterOrder[a.semester];
-            });
+    const projects = Object.entries(data)
+        .map(([id, val]) => ({ id, ...val }))
+        .sort((a, b) => {
+            const yd = b.year - a.year;
+            return yd !== 0
+                ? yd
+                : semesterOrder[b.semester] - semesterOrder[a.semester];
+        });
 
-            setProjects(sorted);
-            setSelected(sorted[0]);
-        };
+    if (projects.length === 0) return null;
 
-        fetchData();
-    }, []);
-
-    if (!selected) return null;
+    const [featured, ...others] = projects;
 
     return (
         <section className="py-20 px-4">
             <div className="max-w-5xl mx-auto space-y-16">
-                {/* Main Project Section - No Card */}
-                <div>
+                {/* ── featured project ── */}
+                <article>
                     <h1 className="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">
-                        {selected.title}
+                        {featured.title}
                     </h1>
+
                     <p className="text-lg text-gray-700 mb-8 max-w-2xl">
-                        {selected.description}
+                        {featured.description}
                     </p>
 
                     <div className="w-full aspect-video bg-gray-100 flex items-center justify-center rounded-xl overflow-hidden mb-8 border border-gray-300">
-                        {selected.imageUrl ? (
+                        {featured.imageUrl ? (
                             <img
-                                src={selected.imageUrl}
-                                alt="project image"
+                                src={featured.imageUrl}
+                                alt={`${featured.title} preview`}
                                 className="w-full h-full object-cover"
                             />
                         ) : (
@@ -60,91 +52,93 @@ export default function ProjectPage() {
                         )}
                     </div>
 
-                    <div className="text-sm text-gray-700 space-y-2">
-                        <p>
-                            <strong>Semester:</strong> {selected.semester}{" "}
-                            {selected.year}
-                        </p>
-                        {selected.technologies?.length > 0 && (
-                            <p>
+                    <ul className="text-sm text-gray-700 space-y-2">
+                        <li>
+                            <strong>Semester:</strong> {featured.semester}{" "}
+                            {featured.year}
+                        </li>
+                        {featured.technologies?.length > 0 && (
+                            <li>
                                 <strong>Technologies:</strong>{" "}
-                                {selected.technologies.join(", ")}
-                            </p>
+                                {featured.technologies.join(", ")}
+                            </li>
                         )}
-                        {selected.developers?.length > 0 && (
-                            <p>
+                        {featured.developers?.length > 0 && (
+                            <li>
                                 <strong>Developers:</strong>{" "}
-                                {selected.developers.join(", ")}
-                            </p>
+                                {featured.developers.join(", ")}
+                            </li>
                         )}
-                        {selected.github && (
-                            <p>
+                        {featured.github && (
+                            <li>
                                 <strong>GitHub:</strong>{" "}
                                 <a
-                                    href={selected.github}
+                                    href={featured.github}
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                     className="text-blue-600 underline hover:text-blue-800"
                                 >
-                                    {selected.github}
+                                    {featured.github}
                                 </a>
-                            </p>
+                            </li>
                         )}
-                        {selected.live && (
-                            <p>
+                        {featured.live && (
+                            <li>
                                 <strong>Live Site:</strong>{" "}
                                 <a
-                                    href={selected.live}
+                                    href={featured.live}
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                     className="text-blue-600 underline hover:text-blue-800"
                                 >
-                                    {selected.live}
+                                    {featured.live}
                                 </a>
-                            </p>
+                            </li>
                         )}
-                    </div>
-                </div>
+                    </ul>
+                </article>
 
-                {/* Other Projects Preview */}
-                <div>
-                    <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                        Other Projects
-                    </h2>
-                    <div className="flex gap-4 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-hide">
-                        {projects.map((proj) => (
-                            <button
-                                key={proj.id}
-                                onClick={() => setSelected(proj)}
-                                className={`flex-shrink-0 min-w-[250px] max-w-[300px] bg-white border ${
-                                    proj.id === selected.id
-                                        ? "border-blue-500"
-                                        : "border-gray-200"
-                                } rounded-2xl shadow-sm overflow-hidden hover:shadow-md transition-all text-left`}
-                            >
-                                <div className="aspect-video bg-gray-100 border-b border-gray-200">
-                                    {proj.imageUrl ? (
-                                        <img
-                                            src={proj.imageUrl}
-                                            alt={proj.title}
-                                            className="w-full h-full object-cover"
-                                        />
-                                    ) : (
-                                        <div className="flex items-center justify-center h-full text-sm text-gray-500">
-                                            No Image
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="p-4 space-y-1">
-                                    <div className="text-sm font-semibold text-gray-800 truncate">
-                                        {proj.title}
+                {/* ── remaining projects in 3-col grid ── */}
+                {others.length > 0 && (
+                    <section>
+                        <h2 className="text-xl font-semibold text-gray-800 mb-6">
+                            More Projects
+                        </h2>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {others.map((proj) => (
+                                <Link
+                                    key={proj.id}
+                                    href={`/projects/${slugify(proj.title)}`}
+                                    className="bg-white rounded-2xl shadow-sm hover:shadow-md transition overflow-hidden border border-gray-200"
+                                >
+                                    <div className="aspect-video bg-gray-100 border-b border-gray-200">
+                                        {proj.imageUrl ? (
+                                            <img
+                                                src={proj.imageUrl}
+                                                alt={proj.title}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        ) : (
+                                            <div className="flex items-center justify-center h-full text-sm text-gray-500">
+                                                No Image
+                                            </div>
+                                        )}
                                     </div>
-                                    <div className="text-xs text-gray-500">
-                                        {proj.semester} {proj.year}
+
+                                    <div className="p-4 space-y-1">
+                                        <h3 className="text-sm font-semibold text-gray-800 truncate">
+                                            {proj.title}
+                                        </h3>
+                                        <p className="text-xs text-gray-500">
+                                            {proj.semester} {proj.year}
+                                        </p>
                                     </div>
-                                </div>
-                            </button>
-                        ))}
-                    </div>
-                </div>
+                                </Link>
+                            ))}
+                        </div>
+                    </section>
+                )}
             </div>
         </section>
     );

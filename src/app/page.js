@@ -4,6 +4,7 @@ import Link from "next/link";
 import Hero from "./Hero.client";
 import Curve from "@/assets/curve";
 import Project from "./Project.client";
+import CTALink from "@/components/CTALink";
 
 export default async function CodeHubLanding() {
     const [projSnap, tmpSnap, faqSnap, formSnap] = await Promise.all([
@@ -45,8 +46,11 @@ export default async function CodeHubLanding() {
                 <div
                     style={{
                         backgroundImage:
-                            "url(/dot.png), linear-gradient(to bottom right, #334BB7 25%, #3556B9 75%)",
-                        backgroundRepeat: "repeat",
+                            "url(/dot2.png), radial-gradient(ellipse at bottom right, #444A6C 12%, #3A68FF 75%)",
+                        backgroundSize: "10px, cover",
+                        backgroundPosition: "center, center",
+                        backgroundRepeat: "repeat, no-repeat",
+                        backgroundBlendMode: "normal, normal",
                     }}
                 >
                     <Curve className="w-full mb-25 rotate-180" />
@@ -129,12 +133,7 @@ function RecentProjects({ projects }) {
                     ))}
                 </div>
                 <div className="text-center mt-12">
-                    <Link
-                        href="/projects"
-                        className="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-full shadow hover:bg-indigo-700 transition"
-                    >
-                        Browse All Projects
-                    </Link>
+                    <CTALink href="/projects">Browse All Projects</CTALink>
                 </div>
             </div>
         </section>
@@ -174,13 +173,8 @@ function Templates({ templates }) {
                         </div>
                     ))}
                 </div>
-                <div className="text-center mt-12">
-                    <Link
-                        href="/templates"
-                        className="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-full shadow hover:bg-indigo-700 transition"
-                    >
-                        See All Templates
-                    </Link>
+                <div className="mt-12">
+                    <CTALink href="/templates">See All Templates</CTALink>
                 </div>
             </div>
         </section>
@@ -210,12 +204,7 @@ function FAQs({ faqs }) {
                     ))}
                 </div>
                 <div className="text-center mt-10">
-                    <Link
-                        href="/faqs"
-                        className="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-full shadow hover:bg-blue-600 transition"
-                    >
-                        More FAQs
-                    </Link>
+                    <CTALink href="/faqs">More FAQs</CTALink>
                 </div>
             </div>
         </section>
@@ -234,20 +223,15 @@ function CTA() {
                     is your space to grow, build, and shine. Join our community
                     or check out past projects to get inspired.
                 </p>
-                <div className="flex flex-col sm:flex-row justify-center gap-4">
-                    <Link
+                <div className="flex flex-col sm:flex-row justify-center gap-4 w-fit mx-auto">
+                    <CTALink
                         href="https://discord.gg/bkmC9NYMaN"
                         target="_blank"
-                        className="bg-white text-blue-600 font-semibold px-6 py-3 rounded-full  hover:scale-105 transition"
+                        variant="white"
                     >
                         Join the Discord
-                    </Link>
-                    <Link
-                        href="/projects"
-                        className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-full hover:scale-105 transition"
-                    >
-                        Browse Projects
-                    </Link>
+                    </CTALink>
+                    <CTALink href="/projects">Browse Projects</CTALink>
                 </div>
             </div>
         </section>
