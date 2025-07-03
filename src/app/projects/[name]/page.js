@@ -2,6 +2,7 @@ import { ref, get } from "firebase/database";
 import { db } from "@/lib/firebase";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
 export default async function ProjectPage({ params }) {
     const snapshot = await get(ref(db, "projects"));
     const data = snapshot.val() || {};

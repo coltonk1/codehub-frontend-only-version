@@ -6,6 +6,8 @@ import Curve from "@/assets/curve";
 import Project from "./Project.client";
 import CTALink from "@/components/CTALink";
 
+export const dynamic = "force-dynamic";
+
 export default async function CodeHubLanding() {
     const [projSnap, tmpSnap, faqSnap, formSnap] = await Promise.all([
         get(ref(db, "projects")),

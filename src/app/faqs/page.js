@@ -1,6 +1,7 @@
 import { ref, get } from "firebase/database";
 import { db } from "@/lib/firebase";
 
+export const dynamic = "force-dynamic";
 export default async function FaqsPage() {
     const snapshot = await get(ref(db, "faqs"));
     const data = snapshot.val() || {};

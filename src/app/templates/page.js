@@ -27,6 +27,8 @@ function unslugify(slug) {
     return CATEGORIES.find((c) => slugify(c) === slug) || null;
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function TemplatesPage({ searchParams }) {
     const slug = searchParams?.category || slugify(CATEGORIES[0]);
     const activeCategory = unslugify(slug);

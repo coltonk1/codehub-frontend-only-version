@@ -2,6 +2,7 @@ import { get, ref } from "firebase/database";
 import { db } from "@/lib/firebase";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
 export default async function FormDetailPage({ params }) {
     const snap = await get(ref(db, "forms"));
     const data = snap.val() || {};
