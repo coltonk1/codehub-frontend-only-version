@@ -27,7 +27,7 @@ export default function DashboardLink() {
     if (!isAdmin) return null;
 
     return (
-        <Link href="/dashboard" className="hover:text-black p-4">
+        <Link href="/dashboard" className="hover:text-black w-full block">
             Dashboard
         </Link>
     );
