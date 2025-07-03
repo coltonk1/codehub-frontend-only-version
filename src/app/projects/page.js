@@ -8,6 +8,7 @@ function slugify(title) {
     return title.toLowerCase().replace(/\s+/g, "-");
 }
 
+export const dynamic = "force-dynamic";
 export default async function ProjectPage() {
     const snap = await get(ref(db, "projects"));
     const data = snap.val() ?? {};
