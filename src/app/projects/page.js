@@ -31,26 +31,28 @@ export default async function ProjectPage() {
             <div className="max-w-5xl mx-auto space-y-16">
                 {/* ── featured project ── */}
                 <article>
-                    <h1 className="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">
+                    <h1 className="text-4xl font-bold text-gray-800 mb-4">
                         {featured.title}
                     </h1>
 
-                    <p className="text-lg text-gray-700 mb-8 max-w-2xl whitespace-pre-wrap">
-                        {featured.description}
-                    </p>
+                    <div className="flex gap-4">
+                        <p className="flex-1 text-lg text-gray-700 mb-8 whitespace-pre-wrap">
+                            {featured.description}
+                        </p>
 
-                    <div className="w-full aspect-video bg-gray-100 flex items-center justify-center rounded-xl overflow-hidden mb-8 border border-gray-300">
-                        {featured.imageUrl ? (
-                            <img
-                                src={featured.imageUrl}
-                                alt={`${featured.title} preview`}
-                                className="w-full h-full object-cover"
-                            />
-                        ) : (
-                            <span className="text-gray-500 text-sm">
-                                No Image Available
-                            </span>
-                        )}
+                        <div className="flex-1 w-full max-w-3xl aspect-video bg-gray-100 flex items-center justify-center rounded-xl overflow-hidden mb-8 border border-gray-300">
+                            {featured.imageUrl ? (
+                                <img
+                                    src={featured.imageUrl}
+                                    alt={`${featured.title} preview`}
+                                    className="w-full h-full object-cover"
+                                />
+                            ) : (
+                                <span className="text-gray-500 text-sm">
+                                    No Image Available
+                                </span>
+                            )}
+                        </div>
                     </div>
 
                     <ul className="text-sm text-gray-700 space-y-2">
@@ -103,7 +105,7 @@ export default async function ProjectPage() {
                 {others.length > 0 && (
                     <section>
                         <h2 className="text-xl font-semibold text-gray-800 mb-6">
-                            More Projects
+                            Other Winning Projects
                         </h2>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
