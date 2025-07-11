@@ -17,7 +17,7 @@ export default async function FormDetailPage({ params }) {
     if (!match) return notFound();
 
     return (
-        <section className="px-4 py-20 max-w-5xl mx-auto">
+        <section className="px-4 py-20 pb-5 max-w-5xl mx-auto">
             <div className="text-center mb-10">
                 <h1 className="text-4xl font-bold text-gray-800">
                     {match.title}
@@ -27,7 +27,7 @@ export default async function FormDetailPage({ params }) {
                 </p>
             </div>
 
-            <div className="rounded-2xl shadow-lg overflow-hidden aspect-video bg-gray-100">
+            <div className="h-150 border-1 border-zinc-200 rounded-sm">
                 <iframe
                     src={match.url}
                     className="w-full h-full"
