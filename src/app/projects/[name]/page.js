@@ -23,7 +23,7 @@ export default async function ProjectPage({ params }) {
                 {project.title}
             </h1>
 
-            <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+            <p className="text-lg text-gray-700 mb-8 leading-relaxed whitespace-pre-wrap">
                 {project.description}
             </p>
 

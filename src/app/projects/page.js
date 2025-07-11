@@ -35,7 +35,7 @@ export default async function ProjectPage() {
                         {featured.title}
                     </h1>
 
-                    <p className="text-lg text-gray-700 mb-8 max-w-2xl">
+                    <p className="text-lg text-gray-700 mb-8 max-w-2xl whitespace-pre-wrap">
                         {featured.description}
                     </p>
 

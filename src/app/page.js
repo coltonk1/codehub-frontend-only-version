@@ -84,28 +84,33 @@ function About() {
                         What is CodeHub?
                     </h2>
                     <p className="text-lg md:text-xl mb-6 leading-relaxed">
-                        CodeHub is a student-run organization at the University
-                        of Georgia focused on building a vibrant community for
-                        aspiring developers, engineers, and tech enthusiasts.
-                        Whether you're new to coding or already experienced,
-                        you’ll find opportunities to grow, collaborate, and
-                        build real-world projects.
+                        CodeHub is a student-led tech organization at the
+                        University of Georgia that helps students of all
+                        experience levels learn to code and build real projects.
+                        Through weekly sessions and team-based semester
+                        projects, members can join either the Learn Track (for
+                        web development or Python) or the Project Track (for
+                        building full apps with a team). No prior experience
+                        needed, just curiosity and a willingness to build.
                     </p>
                     <ul className="text-base md:text-lg leading-relaxed space-y-4">
                         <li>
-                            <strong>Skill Development:</strong> Hands-on
-                            workshops, open-source challenges, and curated
-                            resources to help you level up.
+                            <strong>Skill Development:</strong> Learn web
+                            development or Python from the ground up through
+                            beginner-friendly weekly sessions. No experience
+                            required.
                         </li>
                         <li>
-                            <strong>Community & Collaboration:</strong> Connect
-                            with like-minded students, share ideas, and work
-                            together on exciting projects.
+                            <strong>Community & Collaboration:</strong> Be part
+                            of an inclusive student-led tech club where you can
+                            meet others, share ideas, and grow together
+                            regardless of your major or background.
                         </li>
                         <li>
-                            <strong>Impactful Projects:</strong> Build things
-                            that matter—enhance your resume while gaining real
-                            experience and confidence.
+                            <strong>Project Experience:</strong> Join teams to
+                            build creative, semester-long projects that help you
+                            practice real coding skills and create
+                            portfolio-ready work.
                         </li>
                     </ul>
                 </div>
@@ -113,8 +118,8 @@ function About() {
                 <div className="relative flex-1 max-w-md">
                     <img
                         src="/temp-image.jpg"
-                        alt="CodeHub Team"
-                        className="rounded-xl shadow-lg w-full object-cover aspect-video"
+                        alt="What is CodeHub? Image"
+                        className="rounded-xl shadow-lg w-full object-cover"
                     />
                 </div>
             </div>
