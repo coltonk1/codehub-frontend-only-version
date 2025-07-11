@@ -44,7 +44,7 @@ export default async function ProjectPage() {
                         {featured.title}
                     </h1>
 
-                    <div className="flex gap-4">
+                    <div className="flex flex-col md:flex-row gap-4">
                         <p className="flex-1 text-lg text-gray-700 mb-8 whitespace-pre-wrap">
                             {featured.description}
                         </p>
