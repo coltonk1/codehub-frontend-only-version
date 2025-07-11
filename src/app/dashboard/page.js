@@ -587,6 +587,7 @@ function ProjectEditing() {
         developers: "",
         imageFile: null,
         imageUrl: "",
+        winner: false,
     });
     const [editingId, setEditingId] = useState(null);
     const fileInputRef = useRef(null);
@@ -613,7 +614,18 @@ function ProjectEditing() {
                 id,
                 ...val,
             }));
-            setProjects(loadedProjects);
+
+            const semesterRank = { Spring: 0, Fall: 1 };
+
+            const sortedProjects = [...loadedProjects].sort((a, b) => {
+                if (a.year !== b.year) return b.year - a.year;
+                const semA = semesterRank[a.semester] || 0;
+                const semB = semesterRank[b.semester] || 0;
+                if (semA !== semB) return semB - semA;
+                if (a.winner !== b.winner) return b.winner - a.winner;
+                return a.title.localeCompare(b.title);
+            });
+            setProjects(sortedProjects);
         });
 
         return () => unsubscribe();
@@ -661,6 +673,7 @@ function ProjectEditing() {
             developers: "",
             imageFile: null,
             imageUrl: "",
+            winner: false,
         });
         if (fileInputRef.current) fileInputRef.current.value = "";
     };
@@ -673,10 +686,17 @@ function ProjectEditing() {
 
     const handleEdit = (project) => {
         setForm({
-            ...project,
-            technologies: project.technologies.join(", "),
-            developers: project.developers.join(", "),
+            title: project.title || "",
+            description: project.description || "",
+            github: project.github || "",
+            live: project.live || "",
+            year: project.year || "",
+            semester: project.semester || "",
+            technologies: (project.technologies || []).join(", "),
+            developers: (project.developers || []).join(", "),
             imageFile: null,
+            imageUrl: project.imageUrl || "",
+            winner: project.winner || false,
         });
         setEditingId(project.id);
         if (fileInputRef.current) fileInputRef.current.value = "";
@@ -743,6 +763,17 @@ function ProjectEditing() {
                         max="2100"
                     />
                 </div>
+                <label className="flex items-center space-x-2">
+                    <input
+                        type="checkbox"
+                        checked={form.winner}
+                        onChange={(e) =>
+                            setForm({ ...form, winner: e.target.checked })
+                        }
+                        className="w-4 h-4"
+                    />
+                    <span>Winner for this semester</span>
+                </label>
                 <input
                     placeholder="Technologies (comma separated)"
                     value={form.technologies}
@@ -801,6 +832,11 @@ function ProjectEditing() {
                             >
                                 <h3 className="text-lg font-bold text-gray-800">
                                     {p.title}
+                                    {p.winner && (
+                                        <span className="ml-2 inline-block text-xs text-green-700 bg-green-100 px-2 py-0.5 rounded">
+                                            Winner
+                                        </span>
+                                    )}
                                 </h3>
                                 <p className="text-sm text-gray-600">
                                     {p.semester} {p.year}

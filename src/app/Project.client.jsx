@@ -6,13 +6,21 @@ export default function Project({ p, delay }) {
     return (
         <motion.div
             key={p.id}
-            className="rounded-2xl bg-white shadow-md hover:shadow-xl transition overflow-hidden"
+            className="rounded-2xl bg-white shadow-md hover:shadow-xl transition overflow-hidden relative"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut", delay: delay }}
             viewport={{ once: true, amount: 0.3 }}
             whileHover={{ scale: 1.02 }}
         >
+            {p.winner && (
+                <div className="absolute top-0 left-0 w-[150px] h-[150px] overflow-hidden z-10">
+                    <div className="absolute w-[150px] left-[-40px] top-[18px] transform -rotate-45 bg-green-600 text-white text-sm font-bold text-center py-1 shadow-md border border-white">
+                        WINNER
+                    </div>
+                </div>
+            )}
+
             {p.imageUrl ? (
                 <img
                     src={p.imageUrl}

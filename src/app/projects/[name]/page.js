@@ -18,8 +18,11 @@ export default async function ProjectPage({ params }) {
     const [id, project] = match;
 
     return (
-        <section className="px-4 pt-12 pb-20 max-w-4xl mx-auto">
+        <section className="px-4 pt-16 pb-20 max-w-4xl mx-auto">
             <h1 className="text-4xl font-bold text-gray-800 mb-4">
+                {project.winner && (
+                    <p className="text-green-600 text-sm">WINNER</p>
+                )}
                 {project.title}
             </h1>
 

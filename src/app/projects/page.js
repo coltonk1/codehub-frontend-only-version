@@ -16,10 +16,16 @@ export default async function ProjectPage() {
     const projects = Object.entries(data)
         .map(([id, val]) => ({ id, ...val }))
         .sort((a, b) => {
-            const yd = b.year - a.year;
-            return yd !== 0
-                ? yd
-                : semesterOrder[b.semester] - semesterOrder[a.semester];
+            const yearDiff = b.year - a.year;
+            if (yearDiff !== 0) return yearDiff;
+            const semesterDiff =
+                (semesterOrder[b.semester] || 0) -
+                (semesterOrder[a.semester] || 0);
+            if (semesterDiff !== 0) return semesterDiff;
+            if ((b.winner ? 1 : 0) !== (a.winner ? 1 : 0)) {
+                return (b.winner ? 1 : 0) - (a.winner ? 1 : 0);
+            }
+            return a.title.localeCompare(b.title);
         });
 
     if (projects.length === 0) return null;
@@ -32,6 +38,9 @@ export default async function ProjectPage() {
                 {/* ── featured project ── */}
                 <article>
                     <h1 className="text-4xl font-bold text-gray-800 mb-4">
+                        {featured.winner && (
+                            <p className="text-green-600 text-sm">WINNER</p>
+                        )}
                         {featured.title}
                     </h1>
 
@@ -105,7 +114,7 @@ export default async function ProjectPage() {
                 {others.length > 0 && (
                     <section>
                         <h2 className="text-xl font-semibold text-gray-800 mb-6">
-                            Other Winning Projects
+                            Other Projects
                         </h2>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -113,8 +122,16 @@ export default async function ProjectPage() {
                                 <Link
                                     key={proj.id}
                                     href={`/projects/${slugify(proj.title)}`}
-                                    className="bg-white rounded-2xl shadow-sm hover:shadow-md transition overflow-hidden border border-gray-200"
+                                    className="relative bg-white rounded-2xl shadow-sm hover:shadow-md transition overflow-hidden border border-gray-200"
                                 >
+                                    {proj.winner && (
+                                        <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-10">
+                                            <div className="absolute w-[150px] left-[-40px] top-[18px] transform -rotate-45 bg-green-600 text-white text-sm font-bold text-center py-1 shadow-md border border-white">
+                                                WINNER
+                                            </div>
+                                        </div>
+                                    )}
+
                                     <div className="aspect-video bg-gray-100 border-b border-gray-200">
                                         {proj.imageUrl ? (
                                             <img
