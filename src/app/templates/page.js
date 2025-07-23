@@ -2,6 +2,7 @@ import { ref, get } from "firebase/database";
 import { db } from "@/lib/firebase";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Head from "next/head";
 
 const CATEGORIES = [
     "front end only",

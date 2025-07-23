@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ref, get } from "firebase/database";
 import { db } from "@/lib/firebase";
+import Head from "next/head";
 
 const semesterOrder = { Spring: 0, Fall: 1 };
 

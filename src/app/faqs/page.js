@@ -1,5 +1,6 @@
 import { ref, get } from "firebase/database";
 import { db } from "@/lib/firebase";
+import Head from "next/head";
 
 export const dynamic = "force-dynamic";
 export default async function FaqsPage() {
