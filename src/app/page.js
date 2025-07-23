@@ -5,6 +5,7 @@ import Hero from "./Hero.client";
 import Curve from "@/assets/curve";
 import Project from "./Project.client";
 import CTALink from "@/components/CTALink";
+import Head from "next/head";
 
 export const dynamic = "force-dynamic";
 
@@ -41,36 +42,41 @@ export default async function CodeHubLanding() {
     }));
 
     return (
-        <div className="min-h-screen overflow-x-hidden flex flex-col gap-10">
-            <Hero />
-            <About />
-            <div className="p-4">
-                <div
-                    style={{
-                        backgroundImage:
-                            "url(/dot2.png), radial-gradient(ellipse at bottom right, #444A6C 12%, #3A68FF 75%)",
-                        backgroundSize: "10px, cover",
-                        backgroundPosition: "center, center",
-                        backgroundRepeat: "repeat, no-repeat",
-                        backgroundBlendMode: "normal, normal",
-                    }}
-                >
-                    <Curve className="w-full mb-25 rotate-180" />
-                    <RecentProjects projects={projects} />
-                    <Templates templates={templates} />
-                    <Curve className="w-full mt-25" />
+        <>
+            <Head>
+                <link rel="canonical" href="https://codehub-uga.com/" />
+            </Head>
+            <div className="min-h-screen overflow-x-hidden flex flex-col gap-10">
+                <Hero />
+                <About />
+                <div className="p-4">
+                    <div
+                        style={{
+                            backgroundImage:
+                                "url(/dot2.png), radial-gradient(ellipse at bottom right, #444A6C 12%, #3A68FF 75%)",
+                            backgroundSize: "10px, cover",
+                            backgroundPosition: "center, center",
+                            backgroundRepeat: "repeat, no-repeat",
+                            backgroundBlendMode: "normal, normal",
+                        }}
+                    >
+                        <Curve className="w-full mb-25 rotate-180" />
+                        <RecentProjects projects={projects} />
+                        <Templates templates={templates} />
+                        <Curve className="w-full mt-25" />
+                    </div>
                 </div>
-            </div>
-            <FAQs faqs={faqs} />
-            <CTA />
+                <FAQs faqs={faqs} />
+                <CTA />
 
-            <footer className="bg-gray-900 text-gray-400 text-center py-6">
-                <p className="text-sm">
-                    © {new Date().getFullYear()} CodeHub @ UGA. All rights
-                    reserved.
-                </p>
-            </footer>
-        </div>
+                <footer className="bg-gray-900 text-gray-400 text-center py-6">
+                    <p className="text-sm">
+                        © {new Date().getFullYear()} CodeHub @ UGA. All rights
+                        reserved.
+                    </p>
+                </footer>
+            </div>
+        </>
     );
 }
 

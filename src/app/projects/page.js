@@ -33,133 +33,141 @@ export default async function ProjectPage() {
     const [featured, ...others] = projects;
 
     return (
-        <section className="py-20 px-4">
-            <div className="max-w-5xl mx-auto space-y-16">
-                {/* ── featured project ── */}
-                <article>
-                    <h1 className="text-4xl font-bold text-gray-800 mb-4">
-                        {featured.winner && (
-                            <p className="text-green-600 text-sm">WINNER</p>
-                        )}
-                        {featured.title}
-                    </h1>
+        <>
+            <Head>
+                <link rel="canonical" href="https://codehub-uga.com/projects" />
+            </Head>
 
-                    <div className="flex flex-col md:flex-row gap-4">
-                        <p className="flex-1 text-lg text-gray-700 mb-8 whitespace-pre-wrap">
-                            {featured.description}
-                        </p>
-
-                        <div className="flex-1 w-full max-w-3xl aspect-video bg-gray-100 flex items-center justify-center rounded-xl overflow-hidden mb-8 border border-gray-300">
-                            {featured.imageUrl ? (
-                                <img
-                                    src={featured.imageUrl}
-                                    alt={`${featured.title} preview`}
-                                    className="w-full h-full object-cover"
-                                />
-                            ) : (
-                                <span className="text-gray-500 text-sm">
-                                    No Image Available
-                                </span>
+            <section className="py-20 px-4">
+                <div className="max-w-5xl mx-auto space-y-16">
+                    {/* ── featured project ── */}
+                    <article>
+                        <h1 className="text-4xl font-bold text-gray-800 mb-4">
+                            {featured.winner && (
+                                <p className="text-green-600 text-sm">WINNER</p>
                             )}
+                            {featured.title}
+                        </h1>
+
+                        <div className="flex flex-col md:flex-row gap-4">
+                            <p className="flex-1 text-lg text-gray-700 mb-8 whitespace-pre-wrap">
+                                {featured.description}
+                            </p>
+
+                            <div className="flex-1 w-full max-w-3xl aspect-video bg-gray-100 flex items-center justify-center rounded-xl overflow-hidden mb-8 border border-gray-300">
+                                {featured.imageUrl ? (
+                                    <img
+                                        src={featured.imageUrl}
+                                        alt={`${featured.title} preview`}
+                                        className="w-full h-full object-cover"
+                                    />
+                                ) : (
+                                    <span className="text-gray-500 text-sm">
+                                        No Image Available
+                                    </span>
+                                )}
+                            </div>
                         </div>
-                    </div>
 
-                    <ul className="text-sm text-gray-700 space-y-2">
-                        <li>
-                            <strong>Semester:</strong> {featured.semester}{" "}
-                            {featured.year}
-                        </li>
-                        {featured.technologies?.length > 0 && (
+                        <ul className="text-sm text-gray-700 space-y-2">
                             <li>
-                                <strong>Technologies:</strong>{" "}
-                                {featured.technologies.join(", ")}
+                                <strong>Semester:</strong> {featured.semester}{" "}
+                                {featured.year}
                             </li>
-                        )}
-                        {featured.developers?.length > 0 && (
-                            <li>
-                                <strong>Developers:</strong>{" "}
-                                {featured.developers.join(", ")}
-                            </li>
-                        )}
-                        {featured.github && (
-                            <li>
-                                <strong>GitHub:</strong>{" "}
-                                <a
-                                    href={featured.github}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-blue-600 underline hover:text-blue-800"
-                                >
-                                    {featured.github}
-                                </a>
-                            </li>
-                        )}
-                        {featured.live && (
-                            <li>
-                                <strong>Live Site:</strong>{" "}
-                                <a
-                                    href={featured.live}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-blue-600 underline hover:text-blue-800"
-                                >
-                                    {featured.live}
-                                </a>
-                            </li>
-                        )}
-                    </ul>
-                </article>
+                            {featured.technologies?.length > 0 && (
+                                <li>
+                                    <strong>Technologies:</strong>{" "}
+                                    {featured.technologies.join(", ")}
+                                </li>
+                            )}
+                            {featured.developers?.length > 0 && (
+                                <li>
+                                    <strong>Developers:</strong>{" "}
+                                    {featured.developers.join(", ")}
+                                </li>
+                            )}
+                            {featured.github && (
+                                <li>
+                                    <strong>GitHub:</strong>{" "}
+                                    <a
+                                        href={featured.github}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-blue-600 underline hover:text-blue-800"
+                                    >
+                                        {featured.github}
+                                    </a>
+                                </li>
+                            )}
+                            {featured.live && (
+                                <li>
+                                    <strong>Live Site:</strong>{" "}
+                                    <a
+                                        href={featured.live}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-blue-600 underline hover:text-blue-800"
+                                    >
+                                        {featured.live}
+                                    </a>
+                                </li>
+                            )}
+                        </ul>
+                    </article>
 
-                {/* ── remaining projects in 3-col grid ── */}
-                {others.length > 0 && (
-                    <section>
-                        <h2 className="text-xl font-semibold text-gray-800 mb-6">
-                            Other Projects
-                        </h2>
+                    {/* ── remaining projects in 3-col grid ── */}
+                    {others.length > 0 && (
+                        <section>
+                            <h2 className="text-xl font-semibold text-gray-800 mb-6">
+                                Other Projects
+                            </h2>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {others.map((proj) => (
-                                <Link
-                                    key={proj.id}
-                                    href={`/projects/${slugify(proj.title)}`}
-                                    className="relative bg-white rounded-2xl shadow-sm hover:shadow-md transition overflow-hidden border border-gray-200"
-                                >
-                                    {proj.winner && (
-                                        <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-10">
-                                            <div className="absolute w-[150px] left-[-40px] top-[18px] transform -rotate-45 bg-green-600 text-white text-sm font-bold text-center py-1 shadow-md border border-white">
-                                                WINNER
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    <div className="aspect-video bg-gray-100 border-b border-gray-200">
-                                        {proj.imageUrl ? (
-                                            <img
-                                                src={proj.imageUrl}
-                                                alt={proj.title}
-                                                className="w-full h-full object-cover"
-                                            />
-                                        ) : (
-                                            <div className="flex items-center justify-center h-full text-sm text-gray-500">
-                                                No Image
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {others.map((proj) => (
+                                    <Link
+                                        key={proj.id}
+                                        href={`/projects/${slugify(
+                                            proj.title
+                                        )}`}
+                                        className="relative bg-white rounded-2xl shadow-sm hover:shadow-md transition overflow-hidden border border-gray-200"
+                                    >
+                                        {proj.winner && (
+                                            <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-10">
+                                                <div className="absolute w-[150px] left-[-40px] top-[18px] transform -rotate-45 bg-green-600 text-white text-sm font-bold text-center py-1 shadow-md border border-white">
+                                                    WINNER
+                                                </div>
                                             </div>
                                         )}
-                                    </div>
 
-                                    <div className="p-4 space-y-1">
-                                        <h3 className="text-sm font-semibold text-gray-800 truncate">
-                                            {proj.title}
-                                        </h3>
-                                        <p className="text-xs text-gray-500">
-                                            {proj.semester} {proj.year}
-                                        </p>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
-                    </section>
-                )}
-            </div>
-        </section>
+                                        <div className="aspect-video bg-gray-100 border-b border-gray-200">
+                                            {proj.imageUrl ? (
+                                                <img
+                                                    src={proj.imageUrl}
+                                                    alt={proj.title}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            ) : (
+                                                <div className="flex items-center justify-center h-full text-sm text-gray-500">
+                                                    No Image
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        <div className="p-4 space-y-1">
+                                            <h3 className="text-sm font-semibold text-gray-800 truncate">
+                                                {proj.title}
+                                            </h3>
+                                            <p className="text-xs text-gray-500">
+                                                {proj.semester} {proj.year}
+                                            </p>
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+                </div>
+            </section>
+        </>
     );
 }

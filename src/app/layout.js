@@ -31,7 +31,6 @@ export default function RootLayout({ children }) {
         <html lang="en">
             <head>
                 <link rel="icon" href="/favicon.ico" />
-                <link rel="canonical" href="https://codehub-uga.com/" />
             </head>
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
