@@ -3,6 +3,7 @@ import { db } from "@/lib/firebase";
 import Link from "next/link";
 import Head from "next/head";
 
+export const dynamic = "force-dynamic";
 export default async function FormsPage() {
     const snap = await get(ref(db, "forms"));
     const data = snap.val() || {};
